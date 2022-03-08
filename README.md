@@ -54,3 +54,8 @@ php artisan db:seed --class=DatabaseSeeder
 ```
 
 Acessar: http://localhost:8080/
+
+Diagrama do banco de dados
+
+![image](https://user-images.githubusercontent.com/61431715/157334712-7eb9d31d-44c1-42aa-a695-35da03b6cc3b.png)
+
