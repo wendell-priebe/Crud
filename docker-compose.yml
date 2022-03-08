@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  # Imagem customizada criada pelo Dockerfile
+  # para acessar esse container "docker-compose exec app bash"# assim podendo rodar comando do php/laravel dentro
+  app:
+    build:
+      args:
+        user: wendell
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    container_name: laravel-9
+    image: wendellpriebe/laravel-9-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+        - ./:/var/www
+    networks:
+      - docker-laravel
+
+  # nginx
+  nginx:
+    image: nginx:alpine
+    container_name: nginx
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - docker-laravel
+
+  # banco de dados
+  mysql:
+    image: mysql:5.7.22
+    container_name: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+    volumes:
+      - ./.docker/mysql/dbdata:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - docker-laravel
+
+  # redis
+  redis:
+    image: redis:latest
+    container_name: redis
+    networks:
+      - docker-laravel
+
+  # npm
+  npm: 
+    image: node:slim
+    container_name: npm
+    volumes: 
+        - ./:/var/www
+    working_dir: /var/www
+    # entrypoint: ['npm']
+    networks:
+      - docker-laravel
+
+networks:
+  docker-laravel:
+    driver: bridge

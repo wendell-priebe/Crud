@@ -1,0 +1,23 @@
+:root {
+  --color-blue:#6583BF;
+  --color-sky:#4ED9D9;
+  --color-yellow:#F2B90C;
+  --color-watermelon:#F25041;
+  --color-pink:#F25790;
+  --color-background:#e4e4e4;
+  --color-sky2:#CEF2F2;
+  --color-sky3:#04D9C4;
+  --color-sky4:#5B48D9;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  background-color: var(--color-background);
+}
