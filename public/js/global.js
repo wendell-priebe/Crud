@@ -19409,10 +19409,10 @@ var __WEBPACK_AMD_DEFINE_RESULT__;/**
 
 /***/ }),
 
-/***/ "./resources/scss/global.scss":
-/*!************************************!*\
-  !*** ./resources/scss/global.scss ***!
-  \************************************/
+/***/ "./resources/views/scss/style.scss":
+/*!*****************************************!*\
+  !*** ./resources/views/scss/style.scss ***!
+  \*****************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -19727,7 +19727,7 @@ process.umask = function() { return 0; };
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
 /******/ 		var installedChunks = {
 /******/ 			"/js/global": 0,
-/******/ 			"scss/global": 0
+/******/ 			"scss/style": 0
 /******/ 		};
 /******/ 		
 /******/ 		// no chunk on demand loading
@@ -19777,8 +19777,8 @@ process.umask = function() { return 0; };
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 	__webpack_require__.O(undefined, ["scss/global"], () => (__webpack_require__("./resources/js/global.js")))
-/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["scss/global"], () => (__webpack_require__("./resources/scss/global.scss")))
+/******/ 	__webpack_require__.O(undefined, ["scss/style"], () => (__webpack_require__("./resources/js/global.js")))
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["scss/style"], () => (__webpack_require__("./resources/views/scss/style.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()

@@ -1,9 +1,9 @@
-## Modelo de exemplo do laravel com docker pronto.
+## Crud ...
 
 ### Como rodar:
 Clonar repositório
 ```sh
-git clone 
+git clone https://github.com/wendell-priebe/Crud.git
 ```
 Remover o versionamento
 ```sh

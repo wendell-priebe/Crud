@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\{
+    Login
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +18,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
+});
+
+Route::controller(Login::class)
+    ->name('login.')->prefix('login')->group(function(){
+        Route::get('/', 'index')->name('login');
 });
