@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\{
-    Login
+    UserController
 };
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +20,12 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::controller(Login::class)
-    ->name('login.')->prefix('login')->group(function(){
+Route::controller(UserController::class)
+    ->name('auth.')->prefix('auth')->group(function(){
         Route::get('/', 'index')->name('login');
+        Route::post('/do', 'authenticate')->name('authenticate');
+        Route::get('/password', 'password')->name('password');
+        Route::get('/register', 'register')->name('register');
+        Route::post('/register/do', 'registerAdd')->name('registerAdd');
+
 });

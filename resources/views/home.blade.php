@@ -22,7 +22,7 @@
     </head>
 
     <body class="antialiased">
-        <a class="btn btn-outline-danger" href="/login">login</a>
+        <a class="btn btn-outline-danger" href="/auth">login</a>
 
         @yield('container')
 
