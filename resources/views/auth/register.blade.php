@@ -26,13 +26,6 @@
       <label  class="" for="password">Confirmar senha</label> 
     </div> 
 
-    <div class="form-check">
-      <input class="form-check-input" type="checkbox" value="" id="admin" name="admin">
-      <label class="form-check-label" for="admin">
-        Administrador
-      </label>
-    </div>
-
     <button type="submit" class="btn btn-primary" style="width: 100%;">Registrar</button>
 
   </form>

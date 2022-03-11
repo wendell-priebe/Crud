@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\GlobalPages;
-use App\Models\Users;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -18,18 +17,23 @@ class UserController extends Controller
 
     public function authenticate(Request $req)
     {
-         $credentials = $req->validate([
-             'email' => ['required', 'email'],
-             'password' => ['required'],
+         $this->validate($req, [
+             'email' => 'required',
+             'password' => 'required',
+         ],[
+             'email.required' => 'E-mail é obrigatório',
+             'password.required' => 'Senha é obrigatório',
          ]);
         
-        $user = Users::where('email', '=', $req->email)->first();
+        //$user = User::where('email', '=', $req->email)->first();
 
         $email = $req->email;
         $password = $req->password;
 
         if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
-            dd('loguei');
+            $req->session()->regenerate();
+ 
+            return redirect()->intended('/');
         }else{
             dd('NÃO', (Auth::attempt(['email' => $email, 'password' => $password])));
         }
@@ -43,21 +47,13 @@ class UserController extends Controller
 
     public function registerAdd(Request $req){
         
-        if($req->admin == null){
-            $admin = true;
-        }else{
-            $admin = false;
-        }
-        //dd($req, $admin);
-
         $id = new GlobalPages();
-        
         DB::table('users')->insert([
             'id' => $id->uuid4(),
             'name' => $req->name,
             'email' => $req->email,
             'password' => Hash::make($req->password),
-            'admin' => $admin,
+            'admin' => false,
             'active' => true,
         ]);
         return view('auth/index');
