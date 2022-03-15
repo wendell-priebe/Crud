@@ -11,6 +11,7 @@ use Database\Seeders\Citys;
 use Database\Seeders\States;
 
 use App\Models\GlobalPages;
+use App\Models\User;
 use Faker\Core\Number;
 
 class DatabaseSeeder extends Seeder
@@ -22,6 +23,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // User::create([
+        //     'name' => 'wendell priebe',
+        //     'email' => 'wendell.priebe@gmail.com',
+        //     'password' =>  bcrypt('123456'), //criptografado
+        // ]);
+        // $this->call([
+        //     Citys::class, //Faz a chamada dos seeders
+        //     States::class,
+        // ]);
 
         for ($i=0; $i < 15 ; $i++) {
             $id = new GlobalPages();

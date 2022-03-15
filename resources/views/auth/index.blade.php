@@ -1,6 +1,6 @@
 @extends('home')
 @section('container')
-
+{{-- Campos vazios --}}
 @if ($errors->any())
     <div class="alert alert-danger">
         <ul>
@@ -9,6 +9,12 @@
             @endforeach
         </ul>
     </div>
+@endif
+{{-- E-mail ou senha errada --}}
+@if(session('danger'))
+  <div class="alert alert-danger">
+    {{ session('danger') }}
+  </div>
 @endif
 
 <div class="container-ssm bg-info rounded-3">

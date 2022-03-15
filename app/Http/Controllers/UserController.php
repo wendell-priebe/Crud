@@ -17,6 +17,7 @@ class UserController extends Controller
 
     public function authenticate(Request $req)
     {
+        // faz validação se o campo está vazio
          $this->validate($req, [
              'email' => 'required',
              'password' => 'required',
@@ -33,11 +34,10 @@ class UserController extends Controller
         if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
             $req->session()->regenerate();
  
-            return redirect()->intended('/');
+            return redirect()->intended('/home');
         }else{
-            dd('NÃO', (Auth::attempt(['email' => $email, 'password' => $password])));
+            return redirect()->back()->with('danger', 'E-mail ou senha inválido!');
         }
- 
     
     }
 
