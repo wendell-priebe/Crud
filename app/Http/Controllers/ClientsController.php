@@ -10,15 +10,15 @@ use PDO;
 
 class ClientsController extends Controller
 {
-    public function index(Request $req){
-        $search = $req->search;
-        $clients = Clients::where(function($query) use ($search){
-            if($search){
-                $query->where('email', $search);
-                $query->orWhere('name', 'LIKE', "%{$search}%");
-            }
-        })->get();
+    protected $model;
+    public function __construct(Clients $clients)
+    {
+        $this->model = $clients;
+    }
 
+    public function index(Request $req){
+        $clients = $this->model
+            ->getClients(search: $req->get('search', ''));
 
         return view('clients.index', compact('clients')); // ou
         //   return view('clients.index', [
@@ -27,10 +27,10 @@ class ClientsController extends Controller
     }
 
     public function show($id){
-        if(!$client = Clients::where('id', $id)->first()){
+        if(!$client = $this->model->where('id', $id)->first()){
             return redirect()->route('clients.index');
         }else{
-            $client = Clients::where('id', $id)->first();
+            $client = $this->model->where('id', $id)->first();
             return view('clients.show', compact('client'));
         }
     }
@@ -55,23 +55,23 @@ class ClientsController extends Controller
         $data['is_cpf'] = $is_cpf;
         // $data['password'] = bcrypt($req->password);
 
-        Clients::create($data); // cadastrar
+        $this->model->create($data); // cadastrar
 
         return redirect()->route('clients.index');
  
     }
 
     public function edit($id){
-        if(!$client = Clients::where('id', $id)->first()){
+        if(!$client = $this->model->where('id', $id)->first()){
             return redirect()->route('clients.index');
         }
-        $client = Clients::where('id', $id)->first();
+        $client = $this->model->where('id', $id)->first();
         return view('clients.edit', compact('client'));
         
     }
 
     public function update(StoreUpdateClientsFormRequest $req, $id){
-        if(!$client = Clients::where('id', $id)->first()){
+        if(!$client = $this->model->where('id', $id)->first()){
             return redirect()->route('clients.index');
         }
         if($req->is_cpf == 'on'){
@@ -87,7 +87,7 @@ class ClientsController extends Controller
     }
 
     public function destroy($id){
-        if(!$client = Clients::where('id', $id)->first()){
+        if(!$client = $this->model->where('id', $id)->first()){
             return redirect()->route('clients.index');
         }
         $client->delete();

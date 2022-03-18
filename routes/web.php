@@ -2,8 +2,11 @@
 
 use App\Http\Controllers\{
     UserController,
-    ClientsController
+    ClientsController,
+    ProductsController,
+    OrdersSalesController
 };
+use App\Models\OrderSales;
 use Illuminate\Support\Facades\Route;
 
 
@@ -12,12 +15,13 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('home');
-});
+    return view('layouts.app');
+})->middleware('auth');
 
 Route::controller(UserController::class)
     ->name('auth.')->prefix('auth')->group(function(){
         Route::get('/', 'index')->name('login');
+        Route::get('/logout', 'logout')->name('logout');
         Route::post('/do', 'authenticate')->name('authenticate');
         Route::get('/password', 'password')->name('password');
         Route::get('/register', 'register')->name('register');
@@ -25,7 +29,7 @@ Route::controller(UserController::class)
 });
 
 Route::controller(ClientsController::class)
-    ->name('clients.')->prefix('clients')->group(function(){
+    ->name('clients.')->prefix('clients')->middleware('auth')->group(function(){
         Route::get('/', 'index')->name('index');
         Route::get('/{id}/edit', 'edit')->name('edit');
         Route::put('/{id}', 'update')->name('update');
@@ -33,6 +37,22 @@ Route::controller(ClientsController::class)
         Route::post('/create', 'store')->name('store');
         Route::delete('/delete/{id}', 'destroy')->name('destroy');
         Route::get('/{id}', 'show')->name('show'); // É importante passar a rota com parametros por ultimo
+});
+
+Route::controller(ProductsController::class)
+    ->name('products.')->prefix('products')->middleware('auth')->group(function(){
+        Route::get('/', 'index')->name('index');
+        Route::get('/{id}/edit', 'edit')->name('edit');
+        Route::put('/{id}', 'update')->name('update');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/create', 'store')->name('store');
+        Route::delete('/delete/{id}', 'destroy')->name('destroy');
+        Route::get('/{id}', 'show')->name('show'); // É importante passar a rota com parametros por ultimo
+});
+
+Route::controller(OrdersSalesController::class)
+    ->name('orders.')->prefix('orders')->middleware('auth')->group(function(){
+        Route::get('/', 'index')->name('index');
 
 });
 

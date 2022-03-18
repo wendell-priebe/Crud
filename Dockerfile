@@ -15,14 +15,14 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip
 
+# instala NodeJS
+RUN apt-get update && apt-get install -y nodejs
+
 # Limpa cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# instala NodeJS
-#RUN apt-get install nodejs
-
 # Instala/habilita PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets nodejs
+RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd sockets 
 
 # Get latest Composer copia o compose para disponibilizar o uso em todos diretorios da maquina
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer

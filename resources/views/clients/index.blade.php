@@ -13,15 +13,30 @@
     <button>Pesquisar</button>
   </form>
 </div>
-<ul>
-  @foreach ($clients as $client)
-      <li>
-        {{ $client->name }} - 
-        {{ $client->email }}
-         | <a href="{{ route('clients.show', $client->id )}}"> Detalhes </a>
-         | <a href="{{ route('clients.edit', $client->id )}}"> Editar </a>
-      </li>
-  @endforeach
 
-</ul>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Email</th>
+      <th>CPF/CNPJ</th>
+      <th>Telefone</th>
+      <th>Detalhes</th>
+      <th>Editar</th>
+    </tr>
+  </thead>
+  <tbody>
+    @foreach ($clients as $client)
+        <tr>
+          <td>{{ $client->name }}</td>
+          <td>{{ $client->email }}</td>
+          <td>{{ $client->cpf_cnpj }}</td>
+          <td>{{ $client->phone }}</td>
+          <td> <a href="{{ route('clients.show', $client->id )}}"> Detalhes </a> </td>
+          <td> <a href="{{ route('clients.edit', $client->id )}}"> Editar </a> </td>       
+        </tr>
+    @endforeach
+  </tbody>
+
+</table>
 @endsection

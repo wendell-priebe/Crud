@@ -1,3 +1,5 @@
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css");
+
 $theme-colors: (
   // "primary": #0074d9,
   // "danger": #ff4136
@@ -22,6 +24,11 @@ $theme-colors: (
   margin-right: auto;
   margin-left: auto;
 }
+
+li {
+  list-style-type: none;
+}
+
 // Usage
 .container-ssm {
   @include make-container();

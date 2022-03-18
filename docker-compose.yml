@@ -10,7 +10,7 @@ services:
         uid: 1000
       context: ./
       dockerfile: Dockerfile
-    container_name: laravel-9
+    container_name: php-com-nodejs
     image: wendellpriebe/laravel-9-app
     restart: unless-stopped
     working_dir: /var/www/
@@ -53,17 +53,6 @@ services:
   redis:
     image: redis:latest
     container_name: redis
-    networks:
-      - docker-laravel
-
-  # npm
-  npm: 
-    image: node:slim
-    container_name: npm
-    volumes: 
-        - ./:/var/www
-    working_dir: /var/www
-    # entrypoint: ['npm', 'start']
     networks:
       - docker-laravel
 

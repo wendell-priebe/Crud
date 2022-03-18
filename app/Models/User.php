@@ -13,7 +13,7 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     protected $guarded = [];
-
+    protected $keyType = 'string'; // sem isso não funciona o uuid
     protected $table  = 'users';
     // public $timestamps = false;
     use HasFactory;

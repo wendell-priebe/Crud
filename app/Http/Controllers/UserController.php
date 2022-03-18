@@ -46,6 +46,17 @@ class UserController extends Controller
     }
 
     public function registerAdd(Request $req){
+
+        // faz validação se o campo está vazio
+        $this->validate($req, [
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+        ],[
+            'name.required' => 'Nome é obrigatório',
+            'email.required' => 'E-mail é obrigatório',
+            'password.required' => 'Senha é obrigatório',
+        ]);
         
         $id = new GlobalPages();
         DB::table('users')->insert([
@@ -59,5 +70,18 @@ class UserController extends Controller
         return view('auth/index');
     }
 
+    public function password(){
+        return view('auth/index');
+    }
+
+    public function logout(Request $request){
+        Auth::logout();
+    
+        $request->session()->invalidate();
+    
+        $request->session()->regenerateToken();
+    
+        return redirect('/');
+    }
     
 }
