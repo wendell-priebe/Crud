@@ -19,6 +19,13 @@ class ProductsController extends Controller
         return view('products.index', [
             'products' => $products 
         ]);
+    }
+
+    public function create(Request $request){
+        $products = $this->products->getIndex(); 
+        return view('products.index', [
+            'products' => $products 
+        ]);
 
         $id = new GlobalPages();
         $data['id'] = $id->uuid4();

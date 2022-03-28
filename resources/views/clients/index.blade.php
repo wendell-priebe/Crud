@@ -3,15 +3,21 @@
 @section('title', 'Usuários')
 
 @section('content')
-<div>
+<div class="d-flex mt-2 align-items-center justify-content-around">
   <h1>
     Listagem de clientes
-    (<a href="{{ route('clients.create') }}">Novo(+)</a>)
   </h1>
-  <form action="{{ route('clients.index') }}" method="GET">
-    <input type="text" name="search" placeholder="Pesquisar">
-    <button>Pesquisar</button>
+
+  <form action="{{ route('clients.index') }}" method="GET" class="d-flex">
+    <input type="text" name="search" placeholder="Pesquisar" class="form-control">
+    <button  class="btn btn-primary">Pesquisar</button>
   </form>
+
+  <h1>
+    <a href="{{ route('clients.create') }}" class="">
+      <i class="bi bi-person-plus-fill"></i>
+    </a>
+  </h1>
 </div>
 
 <table class="table">
@@ -37,6 +43,9 @@
         </tr>
     @endforeach
   </tbody>
-
 </table>
+
+{{ $clients->links("pagination::bootstrap-5") }}
+
+
 @endsection

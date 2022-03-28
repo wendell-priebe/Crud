@@ -15,6 +15,6 @@ class Products extends Model
     use HasFactory;
 
     public function getIndex(){
-        return $this->get();
+        return $this->paginate(10);
     }
 }

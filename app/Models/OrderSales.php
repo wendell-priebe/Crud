@@ -30,8 +30,10 @@ class OrderSales extends Model
             ->join('clients', 'cod_client', '=', 'clients.id')
             ->join('users', 'cod_user', '=', 'users.id')
             ->select('clients.name as client', 'status', 'dt_order', 'discount_value', 'amount', 'users.name as user')
-            ->get();
+            ->paginate(10);
         return $orderSales;
     }
+
+
 
 }

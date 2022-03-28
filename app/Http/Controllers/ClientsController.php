@@ -21,6 +21,7 @@ class ClientsController extends Controller
             ->getClients(search: $req->get('search', ''));
 
         return view('clients.index', compact('clients')); // ou
+        // FAZER ->paginate(10)
         //   return view('clients.index', [
         //    'clients' => $clients 
         // ]);

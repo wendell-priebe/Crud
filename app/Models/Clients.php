@@ -20,7 +20,7 @@ class Clients extends Model
                 $query->where('email', $search);
                 $query->orWhere('name', 'LIKE', "%{$search}%");
             }
-        })->get();
+        })->paginate(10);
         return $clients;
     }
 

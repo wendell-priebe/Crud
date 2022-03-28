@@ -9,6 +9,7 @@
 
 <form action="{{ route('clients.update', $client->id) }}" method="POST">
   @method('PUT')
+  
   <input type="checkbox" name="is_cpf" @if($client->is_cpf == false)checked @endif ><label>CNPJ</label>
   @include('clients._partials.form')
 

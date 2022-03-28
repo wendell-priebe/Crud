@@ -2,6 +2,5 @@
     "/js/global.js": "/js/global.js",
     "/scss/style.css": "/scss/style.css",
     "/js/jquery.js": "/js/jquery.js",
-    "/js/bootstrap.js": "/js/bootstrap.js",
-    "/js/sidebars.js": "/js/sidebars.js"
+    "/js/bootstrap.js": "/js/bootstrap.js"
 }

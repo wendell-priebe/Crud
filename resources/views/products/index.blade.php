@@ -3,15 +3,22 @@
 @section('title', 'Produtos')
 
 @section('content')
-<div>
+
+<div class="d-flex mt-2 align-items-center justify-content-around">
   <h1>
     Listagem de Produtos
-    (<a href="{{ route('products.create') }}">Novo(+)</a>)
   </h1>
-  <form action="{{ route('products.index') }}" method="GET">
-    <input type="text" name="search" placeholder="Pesquisar">
-    <button>Pesquisar</button>
+
+  <form action="{{ route('products.index') }}" method="GET" class="d-flex">
+    <input type="text" name="search" placeholder="Pesquisar" class="form-control">
+    <button  class="btn btn-primary">Pesquisar</button>
   </form>
+
+  <h1>
+    <a href="{{ route('products.create') }}" class="" alt="Adicionar Produto">
+      <i class="bi bi-file-plus-fill"></i>
+    </a>
+  </h1>
 </div>
 
 <table class="table">
@@ -37,4 +44,7 @@
   </tbody>
 
 </table>
+
+{{ $products->links("pagination::bootstrap-5") }}
+
 @endsection
