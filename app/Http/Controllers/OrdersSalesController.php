@@ -25,6 +25,7 @@ class OrdersSalesController extends Controller
 
     public function index(){
         $orderSales = $this->orderSales->getIndex(); 
+        //dd($orderSales);
         return view('orders.index', [
             'orderSales' => $orderSales 
         ]);
@@ -33,10 +34,11 @@ class OrdersSalesController extends Controller
     public function create(){
         $orderSales = $this->orderSales->getIndex(); 
         $typePay = DB::table('payment_type')->get();
+        $products = DB::table('products')->get();
         return view('orders.create', [
-            'Form' => Collective\Html\FormFacade::class,
             'orderSales' => $orderSales,
             'typePay' => $typePay,
+            'products' => $products,
         ]);
     }
 

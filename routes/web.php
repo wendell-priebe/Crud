@@ -21,6 +21,7 @@ Route::get('/home', function () {
 Route::controller(UserController::class)
     ->name('auth.')->prefix('auth')->group(function(){
         Route::get('/', 'index')->name('login');
+        Route::get('/acont', 'acont')->name('acont');
         Route::get('/logout', 'logout')->name('logout');
         Route::post('/do', 'authenticate')->name('authenticate');
         Route::get('/password', 'password')->name('password');

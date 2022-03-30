@@ -84,4 +84,8 @@ class UserController extends Controller
         return redirect('/');
     }
     
+    public function acont(){
+        return view('auth/acont');
+    }
+
 }

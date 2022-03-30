@@ -16,9 +16,8 @@
 
   @include('orders._partials.form')
 
-
 </form>
 
-<a href="/orders"> Cancelar </a>
+<a href="/orders"  class="btn btn-danger"> Cancelar </a>
 
 @endsection
