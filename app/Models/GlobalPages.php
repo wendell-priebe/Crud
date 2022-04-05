@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 
 class GlobalPages extends Model{
+  protected $keyType = 'string'; // sem isso não funciona o uuid
     
   public function uuid4(){
 

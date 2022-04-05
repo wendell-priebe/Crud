@@ -2,7 +2,7 @@
 @csrf
 <input type="text" name="name" placeholder="Nome" value="{{ $client->name ?? old('name')}}">
 <input type="email" name="email" placeholder="E-mail" value="{{ $client->email ?? old('email')}}">
-<input type="number" name="cpf_cnpj" placeholder="CPF ou CNPJ" value="{{ $client->cpf_cnpj  ?? old('cpf_cnpj')}}">
+<input type="number" name="cpf_cnpj" placeholder="CPF ou CNPJ" value="{{ $client->cpf_cnpj ?? old('cpf_cnpj')}}">
 
 {{-- <input type="checkbox" name="is_cpf"  @if(isset($client->is_cpf))@checked(true) @else @checked(false)  @endif > --}}
 {{-- @if($client->is_cpf == false) --}}

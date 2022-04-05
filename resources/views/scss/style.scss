@@ -41,7 +41,9 @@ li {
   @include make-container();
 }
 
-
+input, select{
+  margin-top: 0 !important;
+}
 
 @import "~bootstrap/dist/css/bootstrap"; // faz a importação doas arquivos do bootstrap //desse modo posso editar o arquivo de bootstrap por aq
 //@import "~bootstrap/scss/bootstrap"; // faz a importação doas arquivos do bootstrap //desse modo posso editar o arquivo de bootstrap por aq

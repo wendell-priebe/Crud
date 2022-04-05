@@ -18,6 +18,4 @@
 
 </form>
 
-<a href="/orders"  class="btn btn-danger"> Cancelar </a>
-
 @endsection
