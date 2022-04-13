@@ -49,8 +49,9 @@ class OrdersSalesController extends Controller
         $idOrder = $id->uuid4();
         $user = Auth::user();
         $date = new DateTime();
-        $productValue = DB::table('products')->where('id', '=', $request->product)->get();
-        // dd($user->id);
+        $productValue = DB::table('products')->where('id', '=', $request->product)->first();
+        $cod_payment = DB::table('payment_type')->where('id', '=', $request->cod_payment)->first();
+        //  dd($cod_payment->id);
 
         $this->validate($request, [
             'amount' => 'required',
@@ -72,7 +73,7 @@ class OrdersSalesController extends Controller
             ['note' => $request->note],
             ['dt_delivery' => $date->format('Y-m-d')],
             // ['dt_delivery' => $request->dt_delivery],
-            ['cod_payment' => $request->cod_payment],
+            ['cod_payment' => $cod_payment->id],
             ['cod_client' => $request->cod_client],
             ['cod_user' => $user->id],
         ]);

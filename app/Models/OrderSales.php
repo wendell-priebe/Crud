@@ -21,8 +21,12 @@ class OrderSales extends Model
     ];
 
     public function client(){
-        return $this->belongsTo(Clients::class);
+        return $this->belongsTo(Clients::class, 'cod_client', 'id');
     }
+    public function paymentType(){
+        return $this->belongsTo(PaymentType::class, 'cod_payment', 'id');
+    }
+
 
     public function getIndex(){
         $orderSales = $this
