@@ -4,6 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
+use App\Models\{
+    GlobalPages,
+    PaymentType,
+    Clients
+};
+use DateTime;
 
 class OrderSales extends Model
 {
@@ -21,10 +30,10 @@ class OrderSales extends Model
     ];
 
     public function client(){
-        return $this->belongsTo(Clients::class, 'cod_client', 'id');
+        return $this->belongsTo(Clients::class);
     }
     public function paymentType(){
-        return $this->belongsTo(PaymentType::class, 'cod_payment', 'id');
+        return $this->belongsTo(PaymentType::class);
     }
 
 
@@ -38,6 +47,40 @@ class OrderSales extends Model
         return $orderSales;
     }
 
+    public function storeOrder($request){
+        $id = new GlobalPages();
+        $idOrder = $id->uuid4();
+        $user = Auth::user();
+        $date = new DateTime();
+        $productValue = DB::table('products')->where('id', '=', $request->product)->first();
+        $cod_payment = $this->paymentType->find($request->cod_payment);
+        //  dd($this->paymentType($cod_payment->id));
 
+        DB::table('orders_sales')->insert([
+            ['dt_order' => $date->format('Y-m-d')],
+            ['id' => $idOrder],
+            ['amount' => $request->amount],
+            ['discount_value' => $request->discount_value],
+            ['freight_value' => $request->freight_value],
+            ['status' => $request->status],
+            ['note' => $request->note],
+            ['dt_delivery' => $date->format('Y-m-d')],
+            // ['dt_delivery' => $request->dt_delivery],
+            // ['cod_payment' => $cod_payment->id],
+            ['cod_payment' => cod_payment()->associate($cod_payment)],
+            ['cod_client' => $request->cod_client],
+            ['cod_user' => $user->id],
+        ]);
+
+        // foreach ($request->sales as $product) {
+            DB::table('sales')->insert([
+                ['id' => $id->uuid4()],
+                ['cod_order' => $idOrder],
+                ['cod_product' => $request->product],
+                ['quantity' => $request->qtde],
+                ['unitary_value' => $productValue->value],
+            ]);
+        // }
+    }
 
 }

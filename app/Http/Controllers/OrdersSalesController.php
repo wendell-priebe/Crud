@@ -8,7 +8,6 @@ use App\Models\{
     OrderSales,
     Clients
 };
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -45,14 +44,6 @@ class OrdersSalesController extends Controller
     }
 
     public function store(Request $request){
-        $id = new GlobalPages();
-        $idOrder = $id->uuid4();
-        $user = Auth::user();
-        $date = new DateTime();
-        $productValue = DB::table('products')->where('id', '=', $request->product)->first();
-        $cod_payment = DB::table('payment_type')->where('id', '=', $request->cod_payment)->first();
-        //  dd($cod_payment->id);
-
         $this->validate($request, [
             'amount' => 'required',
             'status' => 'required',
@@ -62,31 +53,8 @@ class OrdersSalesController extends Controller
             'status.required' => 'E-mail é obrigatório',
             'cod_client.required' => 'Senha é obrigatório',
         ]);
-
-        DB::table('orders_sales')->insert([
-            ['dt_order' => $date->format('Y-m-d')],
-            ['id' => $idOrder],
-            ['amount' => $request->amount],
-            ['discount_value' => $request->discount_value],
-            ['freight_value' => $request->freight_value],
-            ['status' => $request->status],
-            ['note' => $request->note],
-            ['dt_delivery' => $date->format('Y-m-d')],
-            // ['dt_delivery' => $request->dt_delivery],
-            ['cod_payment' => $cod_payment->id],
-            ['cod_client' => $request->cod_client],
-            ['cod_user' => $user->id],
-        ]);
-
-        // foreach ($request->sales as $product) {
-            DB::table('sales')->insert([
-                ['id' => $id->uuid4()],
-                ['cod_order' => $idOrder],
-                ['cod_product' => $request->product],
-                ['quantity' => $request->qtde],
-                ['unitary_value' => $productValue->value],
-            ]);
-        // }
+        
+        $this->orderSales->storeOrder($request);
     }
     
 
